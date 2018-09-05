@@ -1,0 +1,17 @@
+Package: Tozy.TZNavigationTweak
+Name: TZNavigationTweak
+Version: 0.1-1
+Description:全屏返回手势
+Section: Tweaks
+Depends: mobilesubstrate, applist
+Conflicts: 
+Replaces: 
+Priority: optional
+Architecture: iphoneos-arm
+Author: TozyZuo
+dev: 
+Homepage: 
+Depiction: 
+Maintainer: TozyZuo
+Icon: 
+

@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'TZNavigationTweak' target in the 'TZNavigationTweak' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

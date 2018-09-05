@@ -1,1 +1,2 @@
 # TZNavigationTweak
+集成了[FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture)的全屏返回手势，在设置app中选择要生效的app，如果目标app已经集成了FDFullscreenPopGesture，则不会注入
