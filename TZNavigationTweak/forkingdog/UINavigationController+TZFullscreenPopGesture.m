@@ -155,7 +155,7 @@ typedef void (^_TZViewControllerWillAppearInjectBlock)(UIViewController *viewCon
         }
     });
 
-    [UIViewController enable];
+//    [UIViewController enable];
 }
 
 - (void)tz_pushViewController:(UIViewController *)viewController animated:(BOOL)animated
