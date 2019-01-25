@@ -1,8 +1,8 @@
-Package: Tozy.TZNavigationTweak
+Package: com.tozy.TZNavigationTweak
 Name: TZNavigationTweak
 Version: 0.1-1
 Description:全屏返回手势
-Section: Tweaks
+Section: System
 Depends: mobilesubstrate, applist
 Conflicts: 
 Replaces: 
