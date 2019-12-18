@@ -67,6 +67,11 @@
     return YES;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
 @end
 
 typedef void (^_TZViewControllerWillAppearInjectBlock)(UIViewController *viewController, BOOL animated);

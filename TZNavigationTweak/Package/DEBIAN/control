@@ -1,9 +1,9 @@
 Package: com.tozy.TZNavigationTweak
 Name: TZNavigationTweak
-Version: 0.1-1
-Description:全屏返回手势
+Version: 1.2
+Description:全屏返回手势(arm64e process support)
 Section: System
-Depends: mobilesubstrate, applist
+Depends: mobilesubstrate, applist, preferenceloader
 Conflicts: 
 Replaces: 
 Priority: optional
