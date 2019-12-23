@@ -58,6 +58,40 @@
 				</dict>
 			</array>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>手势冲突设置</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>Tozy.TZNavigationTweak/UIScrollViewPanGestureRecognizerEnable</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>Tozy.TZNavigationTweak</string>
+			<key>key</key>
+			<string>UIScrollViewPanGestureRecognizerEnable</string>
+			<key>label</key>
+			<string>是否允许同列表手势同时触发</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>Tozy.TZNavigationTweak/UIPanGestureRecognizerEnable</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>Tozy.TZNavigationTweak</string>
+			<key>key</key>
+			<string>UIPanGestureRecognizerEnable</string>
+			<key>label</key>
+			<string>是否允许同拖拽手势同时触发</string>
+		</dict>
 	</array>
 </dict>
 </plist>

@@ -4,4 +4,8 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+    extern NSDictionary *preference;
+    extern NSHashTable *gestureRecognizerDelegates;
+
+    #define TLog(format, ...) NSLog(@"TZNavigationTweak: %@", [NSString stringWithFormat: format, ## __VA_ARGS__])
 #endif

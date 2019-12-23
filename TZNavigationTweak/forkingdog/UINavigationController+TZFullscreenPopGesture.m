@@ -22,14 +22,58 @@
 
 #import "UINavigationController+TZFullscreenPopGesture.h"
 #import <objc/runtime.h>
+#import <CoreFoundation/CoreFoundation.h>
+
+@interface TZPanGestureRecognizer : UIPanGestureRecognizer
+
+@end
+@implementation TZPanGestureRecognizer
+
+@end
 
 @interface _TZFullscreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) UINavigationController *navigationController;
+@property (nonatomic, assign) BOOL UIScrollViewPanGestureRecognizerEnable;
+@property (nonatomic, assign) BOOL UIPanGestureRecognizerEnable;
 
 @end
 
+static inline void prefsChanged(CFNotificationCenterRef center,
+                                void *observer,
+                                CFStringRef name,
+                                const void *object,
+                                CFDictionaryRef userInfo)
+{
+    NSArray *keyList = (NSArray *)CFBridgingRelease(CFPreferencesCopyKeyList((CFStringRef)@"Tozy.TZNavigationTweak", kCFPreferencesCurrentUser, kCFPreferencesAnyHost));
+    preference = (NSDictionary *)CFBridgingRelease(CFPreferencesCopyMultiple((CFArrayRef)keyList, (CFStringRef)@"Tozy.TZNavigationTweak", kCFPreferencesCurrentUser, kCFPreferencesAnyHost));
+    
+//    TLog(@"prefsChanged %@ %@", name, preference);
+    if (preference.count) {
+        NSString *key = [(NSString *)CFBridgingRelease(name) componentsSeparatedByString:@"/"].lastObject;
+        for (_TZFullscreenPopGestureRecognizerDelegate *delegate in gestureRecognizerDelegates) {
+            [delegate setValue:preference[key] forKey:key];
+        }
+    }
+}
+
 @implementation _TZFullscreenPopGestureRecognizerDelegate
+
+- (NSString *)description
+{
+    return [[super description] stringByAppendingFormat:@"UIScrollViewPanGestureRecognizerEnable: %d UIPanGestureRecognizerEnable:%d", self.UIScrollViewPanGestureRecognizerEnable, self.UIPanGestureRecognizerEnable];
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [gestureRecognizerDelegates addObject:self];
+        self.UIScrollViewPanGestureRecognizerEnable = [preference[@"UIScrollViewPanGestureRecognizerEnable"] boolValue];
+        self.UIPanGestureRecognizerEnable = [preference[@"UIPanGestureRecognizerEnable"] boolValue];
+    }
+    return self;
+}
 
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
 {
@@ -69,7 +113,13 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    if ([otherGestureRecognizer isKindOfClass:NSClassFromString(@"UIScrollViewPanGestureRecognizer")])
+    if ([otherGestureRecognizer isKindOfClass:NSClassFromString(@"UIScrollViewPanGestureRecognizer")] &&
+        self.UIScrollViewPanGestureRecognizerEnable)
+    {
+        return YES;
+    }
+    if ([otherGestureRecognizer isMemberOfClass:UIPanGestureRecognizer.class] &&
+        self.UIPanGestureRecognizerEnable)
     {
         return YES;
     }
@@ -142,7 +192,7 @@ typedef void (^_TZViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 + (void)enable
 {
     if ([self instancesRespondToSelector:@selector(fd_fullscreenPopGestureRecognizer)]) {
-        NSLog(@"TZNavigationTweak %@ already import FDFullscreenPopGesture, give up injecting.", NSBundle.mainBundle.bundleIdentifier);
+        TLog(@"%@ already import FDFullscreenPopGesture, give up injecting.", NSBundle.mainBundle.bundleIdentifier);
         return;
     }
     // Inject "-pushViewController:animated:"
@@ -163,6 +213,10 @@ typedef void (^_TZViewControllerWillAppearInjectBlock)(UIViewController *viewCon
             method_exchangeImplementations(originalMethod, swizzledMethod);
         }
     });
+    
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, &prefsChanged, (CFStringRef)@"Tozy.TZNavigationTweak/UIPanGestureRecognizerEnable", NULL, 0);
+
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, &prefsChanged, (CFStringRef)@"Tozy.TZNavigationTweak/UIScrollViewPanGestureRecognizerEnable", NULL, 0);
 
 //    [UIViewController enable];
 }
@@ -236,7 +290,7 @@ typedef void (^_TZViewControllerWillAppearInjectBlock)(UIViewController *viewCon
     UIPanGestureRecognizer *panGestureRecognizer = objc_getAssociatedObject(self, _cmd);
     
     if (!panGestureRecognizer) {
-        panGestureRecognizer = [[UIPanGestureRecognizer alloc] init];
+        panGestureRecognizer = [[TZPanGestureRecognizer alloc] init];
         panGestureRecognizer.maximumNumberOfTouches = 1;
         
         objc_setAssociatedObject(self, _cmd, panGestureRecognizer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);

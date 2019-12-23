@@ -17,6 +17,9 @@
 #import "CaptainHook/CaptainHook.h"
 #import "UINavigationController+TZFullscreenPopGesture.h"
 
+NSDictionary *preference;
+NSHashTable *gestureRecognizerDelegates;
+
 CHConstructor // code block that runs immediately upon load
 {
 	@autoreleasepool
@@ -26,13 +29,18 @@ CHConstructor // code block that runs immediately upon load
             appId = NSProcessInfo.processInfo.processName;//A Fix By https://github.com/radj
             NSLog(@"Process has no bundle ID, use process name instead: %@", appId);
         }
-        NSLog(@"TZNavigationTweak %@ detected", appId);
+        TLog(@"%@ detected", appId);
+        
+        NSDictionary *pref = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/Tozy.TZNavigationTweak.plist"];
+//        TLog(@"pref %@", pref);
 
-        if (![[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/Tozy.TZNavigationTweak.plist"][[NSString stringWithFormat:@"Enabled-%@", appId]] boolValue])
+        if (![pref[[NSString stringWithFormat:@"Enabled-%@", appId]] boolValue])
         {
             return;
         }
-
+        
+        preference = pref;
+        gestureRecognizerDelegates = NSHashTable.weakObjectsHashTable;
         [UINavigationController enable];
 	}
 }
