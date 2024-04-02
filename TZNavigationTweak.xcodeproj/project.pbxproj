@@ -18,8 +18,6 @@
 		BA5674C12BBC219000D3D483 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
 		BA5674C72BBC219000D3D483 /* TZNavigationTweak.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TZNavigationTweak.plist; sourceTree = "<group>"; };
 		BA5674CB2BBC219000D3D483 /* TZNavigationTweak.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TZNavigationTweak.plist; sourceTree = "<group>"; };
-		BA5674CC2BBC219000D3D483 /* TZNavigationTweakIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TZNavigationTweakIcon.png; sourceTree = "<group>"; };
-		BA5674CD2BBC219000D3D483 /* TZNavigationTweakIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TZNavigationTweakIcon@2x.png"; sourceTree = "<group>"; };
 		BA9C3B20213FC4C900AFE398 /* TZNavigationTweak.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = TZNavigationTweak.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9C3B23213FC4C900AFE398 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BA9C3B28213FC4C900AFE398 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
@@ -117,8 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				BA5674CB2BBC219000D3D483 /* TZNavigationTweak.plist */,
-				BA5674CC2BBC219000D3D483 /* TZNavigationTweakIcon.png */,
-				BA5674CD2BBC219000D3D483 /* TZNavigationTweakIcon@2x.png */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
