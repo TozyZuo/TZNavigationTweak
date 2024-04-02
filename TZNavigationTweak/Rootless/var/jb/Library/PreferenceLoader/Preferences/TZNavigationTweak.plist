@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>entry</key>
+	<dict>
+		<key>bundle</key>
+		<string>AltList</string>
+		<key>cell</key>
+		<string>PSLinkListCell</string>
+		<key>label</key>
+		<string>TZNavigationTweak</string>
+		<key>detail</key>
+		<string>ATLApplicationListMultiSelectionController</string>
+		<key>key</key>
+		<string>selectedApplications</string>
+		<key>defaults</key>
+		<string>Tozy.TZNavigationTweak</string>
+		<key>isController</key>
+		<true/>
+		<key>overridePrincipalClass</key>
+		<true/>
+		<key>useSearchBar</key>
+		<true/>
+		<key>sections</key>
+		<array>
+			<dict>
+				<key>sectionType</key>
+				<string>User</string>
+			</dict>
+			<dict>
+				<key>sectionType</key>
+				<string>System</string>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>

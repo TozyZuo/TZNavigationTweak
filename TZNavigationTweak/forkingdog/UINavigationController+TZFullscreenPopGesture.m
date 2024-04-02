@@ -69,8 +69,8 @@ static inline void prefsChanged(CFNotificationCenterRef center,
     self = [super init];
     if (self) {
         [gestureRecognizerDelegates addObject:self];
-        self.UIScrollViewPanGestureRecognizerEnable = [preference[@"UIScrollViewPanGestureRecognizerEnable"] boolValue];
-        self.UIPanGestureRecognizerEnable = [preference[@"UIPanGestureRecognizerEnable"] boolValue];
+        self.UIScrollViewPanGestureRecognizerEnable = preference[@"UIScrollViewPanGestureRecognizerEnable"] ? [preference[@"UIScrollViewPanGestureRecognizerEnable"] boolValue]: YES;
+        self.UIPanGestureRecognizerEnable = preference[@"UIPanGestureRecognizerEnable"] ? [preference[@"UIPanGestureRecognizerEnable"] boolValue] : YES;
     }
     return self;
 }

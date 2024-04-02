@@ -17,6 +17,12 @@
 #import "CaptainHook/CaptainHook.h"
 #import "UINavigationController+TZFullscreenPopGesture.h"
 
+#ifdef ROOTLESS
+#define PathPrefix @"/var/jb"
+#else
+#define PathPrefix @""
+#endif
+
 NSDictionary *preference;
 NSHashTable *gestureRecognizerDelegates;
 
@@ -27,18 +33,19 @@ CHConstructor // code block that runs immediately upon load
         NSString *appId = NSBundle.mainBundle.bundleIdentifier;
         if (!appId) {
             appId = NSProcessInfo.processInfo.processName;//A Fix By https://github.com/radj
-            NSLog(@"Process has no bundle ID, use process name instead: %@", appId);
+            TLog(@"Process has no bundle ID, use process name instead: %@", appId);
         }
         TLog(@"%@ detected", appId);
         
-        NSDictionary *pref = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/Tozy.TZNavigationTweak.plist"];
+        NSDictionary *pref = [NSDictionary dictionaryWithContentsOfFile:[PathPrefix stringByAppendingString:@"/var/mobile/Library/Preferences/Tozy.TZNavigationTweak.plist"]];
 //        TLog(@"pref %@", pref);
 
-        if (![pref[[NSString stringWithFormat:@"Enabled-%@", appId]] boolValue])
+        if (![pref[@"selectedApplications"] containsObject:appId])
         {
+            TLog(@"%@ doesn't enable", appId);
             return;
         }
-        
+        TLog(@"%@ enabled", appId);
         preference = pref;
         gestureRecognizerDelegates = NSHashTable.weakObjectsHashTable;
         [UINavigationController enable];

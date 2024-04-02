@@ -15,6 +15,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA5674C12BBC219000D3D483 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
+		BA5674C72BBC219000D3D483 /* TZNavigationTweak.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TZNavigationTweak.plist; sourceTree = "<group>"; };
+		BA5674CB2BBC219000D3D483 /* TZNavigationTweak.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TZNavigationTweak.plist; sourceTree = "<group>"; };
+		BA5674CC2BBC219000D3D483 /* TZNavigationTweakIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TZNavigationTweakIcon.png; sourceTree = "<group>"; };
+		BA5674CD2BBC219000D3D483 /* TZNavigationTweakIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TZNavigationTweakIcon@2x.png"; sourceTree = "<group>"; };
 		BA9C3B20213FC4C900AFE398 /* TZNavigationTweak.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = TZNavigationTweak.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9C3B23213FC4C900AFE398 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BA9C3B28213FC4C900AFE398 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
@@ -42,6 +47,82 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA5674BF2BBC219000D3D483 /* Rootless */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674C02BBC219000D3D483 /* DEBIAN */,
+				BA5674C22BBC219000D3D483 /* var */,
+			);
+			path = Rootless;
+			sourceTree = "<group>";
+		};
+		BA5674C02BBC219000D3D483 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674C12BBC219000D3D483 /* control */,
+			);
+			path = DEBIAN;
+			sourceTree = "<group>";
+		};
+		BA5674C22BBC219000D3D483 /* var */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674C32BBC219000D3D483 /* jb */,
+			);
+			path = var;
+			sourceTree = "<group>";
+		};
+		BA5674C32BBC219000D3D483 /* jb */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674C42BBC219000D3D483 /* Library */,
+			);
+			path = jb;
+			sourceTree = "<group>";
+		};
+		BA5674C42BBC219000D3D483 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674C52BBC219000D3D483 /* MobileSubstrate */,
+				BA5674C92BBC219000D3D483 /* PreferenceLoader */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		BA5674C52BBC219000D3D483 /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674C62BBC219000D3D483 /* DynamicLibraries */,
+			);
+			path = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		BA5674C62BBC219000D3D483 /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674C72BBC219000D3D483 /* TZNavigationTweak.plist */,
+			);
+			path = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+		BA5674C92BBC219000D3D483 /* PreferenceLoader */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674CA2BBC219000D3D483 /* Preferences */,
+			);
+			path = PreferenceLoader;
+			sourceTree = "<group>";
+		};
+		BA5674CA2BBC219000D3D483 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				BA5674CB2BBC219000D3D483 /* TZNavigationTweak.plist */,
+				BA5674CC2BBC219000D3D483 /* TZNavigationTweakIcon.png */,
+				BA5674CD2BBC219000D3D483 /* TZNavigationTweakIcon@2x.png */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		BA9C3B16213FC4C900AFE398 = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +154,7 @@
 			children = (
 				BA9C3B3B213FC61700AFE398 /* forkingdog */,
 				BA9C3B31213FC4C900AFE398 /* TZNavigationTweak.mm */,
+				BA5674BF2BBC219000D3D483 /* Rootless */,
 				BA9C3B26213FC4C900AFE398 /* Package */,
 				BA9C3B2F213FC4C900AFE398 /* Supporting Files */,
 			);
@@ -234,7 +316,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/opt/MonkeyDev/bin/md --xcbp\n";
+			shellScript = "/opt/MonkeyDev/bin/md-rootless --xcbp\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -326,11 +408,13 @@
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TZNavigationTweak/TZNavigationTweak-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = ROOTLESS;
 				HEADER_SEARCH_PATHS = (
 					"$(MonkeyDevPath)/include",
 					"$(MonkeyDevTheosPath)/vendor/include/**",
 				);
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MonkeyDevBuildPackageOnAnyBuild = NO;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
@@ -361,11 +445,16 @@
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TZNavigationTweak/TZNavigationTweak-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					ROOTLESS,
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(MonkeyDevPath)/include",
 					"$(MonkeyDevTheosPath)/vendor/include/**",
 				);
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MonkeyDevBuildPackageOnAnyBuild = NO;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
